@@ -22,20 +22,43 @@ class Inventario:
     def __init__(self):
         self.productos = list()
 
-    def agregar_producto(self, producto):
+    def agregar_producto(self):
+        while True: #Input de nombre del producto
+            nombre = input("Digite el nombre del producto: ")
+            if len(nombre):
+                break
+        while True: #Input de cantidad del producto
+            try:
+                cantidad = int(input("Digite la cantidad del producto: "))
+                if(cantidad) > 0:
+                    break  
+            except ValueError:
+                print("cantidad invalida, intente nuevamente.")
+        while True: #Input de precio del producto
+            try:
+                precio = int(input("Digite el precio del producto: "))
+                if(precio) > 0:
+                    break  
+            except ValueError:
+                print("precio invalido, intente nuevamente.")
+        producto = Producto(nombre, precio, cantidad)
         self.productos.append(producto)
+        print("Producto agregado al inventario.")
 
-    def buscar_producto(self, nombre):
-        return nombre if nombre in self.productos else None
+    def buscar_producto(self, nombre_item):
+        return next((item.nombre for item in self.productos if item.nombre == nombre_item), None)
 
     def calcular_valor_inventario(self):
-        return sum(self.productos)
+        total = 0
+        for item in self.productos:
+            total += item.precio * item.cantidad
+        return total
 
     def listar_productos(self):
         for item in self.productos:
             print(item)
 
-def menu_principal():
+def menu_principal(inventario: Inventario):
     while(True):
         try:
             opcion = int(input("MENU PRINCIPAL\n\n"
@@ -47,11 +70,23 @@ def menu_principal():
         except ValueError:
             print("opcion no valida, intente nuevamente")
         else:
-            if opcion == 5:
-                break
-
+            if (opcion >0 and opcion <= 5):
+                if opcion == 1:
+                    inventario.agregar_producto()
+                if opcion == 2:
+                    buscar = input("Digite el nombre del producto a buscar: ")
+                    print("Producto no encontrado\n") if inventario.buscar_producto(buscar) is None else print("Producto existente en el inventario\n")
+                if opcion == 3:
+                    print("\nInventario de productos:\n")
+                    inventario.listar_productos()
+                if opcion == 4:
+                    print(f"Valor total de inventario es {inventario.calcular_valor_inventario()}")
+                if opcion == 5:
+                    break
+            else:
+                print("opcion no valida, intente nuevamente")
 if __name__ == "__main__":
     inventario = Inventario()
-    menu_principal()
+    menu_principal(inventario)
 
     
