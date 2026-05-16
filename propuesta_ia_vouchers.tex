@@ -1,0 +1,205 @@
+
+\documentclass[12pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+\geometry{letterpaper, margin=2.5cm}
+\setstretch{1.5}
+
+\title{Propuesta de desarrollo y despliegue de un proyecto de Inteligencia Artificial\\
+\large Reconocimiento automático de vouchers de ventas por datáfono para cuadre de caja}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+
+En los puntos de venta de tiendas y comercios minoristas, el proceso de cuadre de caja suele requerir la validación manual de vouchers generados por datáfonos. Este procedimiento implica registrar valores, fechas, números de autorización, franquicias y referencias de transacción dentro de una plataforma web administrativa.
+
+Actualmente, muchos establecimientos realizan este procedimiento manualmente, lo que genera retrasos en el cierre de caja, errores de digitación, pérdida de vouchers físicos, inconsistencias entre las ventas registradas y los comprobantes bancarios, además de sobrecarga operativa para cajeros y auxiliares administrativos.
+
+El presente proyecto propone el desarrollo de un sistema basado en Inteligencia Artificial y Visión por Computador capaz de reconocer automáticamente la información contenida en imágenes de vouchers de ventas por datáfono y registrar dichos datos directamente en la plataforma web utilizada para el cuadre de caja.
+
+\section{Requisitos del sistema}
+
+\subsection{Necesidad a resolver}
+
+Automatizar el registro de información contenida en vouchers de ventas por datáfono para disminuir errores operativos y reducir el tiempo de cuadre de caja en los puntos de venta.
+
+\subsection{Objetivos generales}
+
+Diseñar e implementar una solución de Inteligencia Artificial capaz de capturar imágenes de vouchers, extraer automáticamente información relevante mediante OCR e IA, validar los datos obtenidos y registrar automáticamente la información en la plataforma web de cuadre de caja.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+    \item Reducir al menos un 80\% del tiempo invertido en digitación manual.
+    \item Disminuir errores humanos en el registro de vouchers.
+    \item Permitir validaciones automáticas de valores y fechas.
+    \item Centralizar digitalmente los comprobantes.
+    \item Facilitar auditorías y trazabilidad financiera.
+\end{itemize}
+
+\section{Diseño de la solución}
+
+\subsection{Arquitectura general}
+
+La solución estará compuesta por los siguientes módulos:
+
+\begin{enumerate}
+    \item Módulo de captura de imágenes.
+    \item Módulo de procesamiento OCR.
+    \item Motor de Inteligencia Artificial.
+    \item API de integración.
+    \item Plataforma web administrativa.
+\end{enumerate}
+
+\subsection{Tecnologías sugeridas}
+
+\begin{itemize}
+    \item OCR Tesseract.
+    \item EasyOCR.
+    \item PaddleOCR.
+    \item FastAPI o Flask.
+    \item PostgreSQL.
+    \item Docker.
+\end{itemize}
+
+\section{Flujo operativo del sistema}
+
+\begin{enumerate}
+    \item El cajero toma una fotografía del voucher.
+    \item La imagen es enviada al servidor IA.
+    \item El OCR extrae el texto.
+    \item El modelo IA identifica los campos importantes.
+    \item El sistema valida formatos y duplicados.
+    \item La información es registrada automáticamente.
+    \item El voucher queda almacenado digitalmente.
+\end{enumerate}
+
+\section{Técnicas de Inteligencia Artificial empleadas}
+
+\subsection{Visión por computador}
+
+Utilizada para mejorar calidad de imágenes, detectar bordes, corregir inclinaciones y eliminar ruido.
+
+\subsection{OCR Inteligente}
+
+Permite convertir texto contenido en imágenes a texto digital editable.
+
+\subsection{Machine Learning supervisado}
+
+Se entrenará un modelo utilizando vouchers históricos para reconocer patrones de diferentes bancos e identificar errores comunes.
+
+\section{Recursos tecnológicos necesarios}
+
+\subsection{Alternativa 1: Implementación en VPS}
+
+\begin{longtable}{|p{5cm}|p{8cm}|}
+\hline
+\textbf{Recurso} & \textbf{Recomendación} \\
+\hline
+CPU & 4 a 8 vCPU \\
+\hline
+RAM & 8 GB a 16 GB \\
+\hline
+Disco & 120 GB a 250 GB SSD \\
+\hline
+Sistema Operativo & Ubuntu Server 24.04 \\
+\hline
+GPU & NVIDIA T4 opcional \\
+\hline
+\end{longtable}
+
+\subsection{Alternativa 2: Implementación local}
+
+\begin{longtable}{|p{5cm}|p{8cm}|}
+\hline
+\textbf{Recurso} & \textbf{Recomendación} \\
+\hline
+Procesador & Intel Core i7 o Ryzen 7 \\
+\hline
+RAM & 16 GB \\
+\hline
+Disco & SSD 1 TB \\
+\hline
+GPU & NVIDIA RTX 3060 o superior \\
+\hline
+Sistema Operativo & Ubuntu o Windows 11 Pro \\
+\hline
+\end{longtable}
+
+\section{Metodología de desarrollo}
+
+\subsection{Metodología seleccionada: Scrum}
+
+Se selecciona Scrum debido a la necesidad de iteraciones rápidas, retroalimentación continua y entrenamiento progresivo del modelo IA.
+
+\subsection{Roles del proyecto}
+
+\begin{longtable}{|p{5cm}|p{8cm}|}
+\hline
+\textbf{Rol} & \textbf{Función} \\
+\hline
+Product Owner & Define requerimientos \\
+\hline
+Scrum Master & Coordina metodología \\
+\hline
+Ingeniero IA & Entrena modelos \\
+\hline
+Backend Developer & APIs y lógica \\
+\hline
+Frontend Developer & Plataforma web \\
+\hline
+DevOps & Infraestructura y despliegue \\
+\hline
+QA Tester & Validaciones \\
+\hline
+Analista funcional & Procesos de negocio \\
+\hline
+\end{longtable}
+
+\section{Seguridad y anonimización}
+
+\subsection{Seguridad}
+
+Se implementarán HTTPS, autenticación JWT, roles y permisos, logs de auditoría y firewalls.
+
+\subsection{Anonimización}
+
+Se ocultarán números completos de tarjeta, se cifrará información sensible y se aplicará retención limitada de imágenes.
+
+\section{Indicadores KPI}
+
+\begin{longtable}{|p{7cm}|p{5cm}|}
+\hline
+\textbf{KPI} & \textbf{Objetivo} \\
+\hline
+Precisión OCR & >95\% \\
+\hline
+Tiempo procesamiento & <5 segundos \\
+\hline
+Reducción digitación manual & 80\% \\
+\hline
+Errores de captura & <2\% \\
+\hline
+Disponibilidad sistema & 99\% \\
+\hline
+\end{longtable}
+
+\section{Conclusiones}
+
+La implementación de un sistema basado en Inteligencia Artificial para reconocimiento automático de vouchers representa una solución estratégica para modernizar los procesos de cuadre de caja en tiendas y puntos de venta.
+
+La combinación de OCR, visión por computador y aprendizaje automático permite automatizar tareas repetitivas y mejorar significativamente la eficiencia operativa.
+
+\end{document}
