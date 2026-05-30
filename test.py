@@ -1,11 +1,9 @@
-import random
+import numpy as np
 
-def generar_usuarios(usuarios: int):
-    nombres = ["p", "l", "k", "j", "h", "f", "g", "d", "s", "a"]
-    personas = []
-    for i in range(usuarios):
-        persona = {'id': i + 1, 'nombre': random.choice(nombres), 'edad': random.randint(18, 65), 'puntuacion': round(random.uniform(0.0, 10.0,),1)}
-        personas.append(persona)
-    return personas
+# Más eficiente para grandes conjuntos de datos
+def varianza(*numeros):
+    return np.var(numeros)
 
-print(generar_usuarios(2))
+# Con 10,000 números, numpy es significativamente más rápido
+grandes_datos = range(10000)
+print(varianza(*grandes_datos))  # Cálculo eficiente
